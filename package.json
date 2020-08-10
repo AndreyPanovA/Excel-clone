@@ -1,0 +1,30 @@
+{
+  "name": "excel",
+  "version": "1.0.0",
+  "description": "Pure JavaScript Excel Application",
+  "main": "webpack.config.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "webpack",
+    "build": "webpack --mode production"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AndreyPanovA/Excel-clone.git"
+  },
+  "keywords": [
+    "js",
+    "javascript",
+    "excel"
+  ],
+  "author": "Panov Andrew <panov3107@mail.ru>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AndreyPanovA/Excel-clone/issues"
+  },
+  "homepage": "https://github.com/AndreyPanovA/Excel-clone#readme",
+  "devDependencies": {
+    "webpack": "^4.44.1",
+    "webpack-cli": "^3.3.12"
+  }
+}
