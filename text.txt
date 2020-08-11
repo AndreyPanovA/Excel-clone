@@ -2,3 +2,7 @@ npm install --save-dev html-webpack-plugin - полагин для webpack
 npm install copy-webpack-plugin --save-dev - полагин для webpack, чтобы вытягивать favicon
 npm install --save-dev clean-webpack-plugin - чистит необходимую папку
 npm install --save-dev mini-css-extract-plugin - сепарирует файлы - выносить css из js  в отдельный фаил
+npm install less-loader --save-dev - loader для less (преобразует js/less)
+npm i -D css-loader - css loader
+npm install --save-dev babel-loader @babel/core - ставим babel 
+npm install @babel/preset-env --save-dev - последние нововведения в js, на сайте babel в том же разделе
