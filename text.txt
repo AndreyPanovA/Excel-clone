@@ -1,0 +1,3 @@
+npm install --save-dev html-webpack-plugin - полагин для webpack
+ npm install copy-webpack-plugin --save-dev - полагин для webpack, чтобы вытягивать favicon
+ npm install --save-dev clean-webpack-plugin - чистит необходимую папку
