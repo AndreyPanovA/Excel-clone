@@ -4,7 +4,10 @@ const { CleanWebpackPlugin } = require("clean-webpack-plugin"); // чистит 
 const HTMLWebpackPlugin = require("html-webpack-plugin");
 const CopyPlugin = require("copy-webpack-plugin"); // favicon
 const MiniCssExtractPlugin = require("mini-css-extract-plugin"); // css modules
-
+const isProd = process.env.NODE_ENV === "production"; // системная переменная для определения текущего режима сборки
+const isDev = !isProd;
+console.log("prod", isProd);
+console.log("dev", isDev);
 module.exports = {
   context: path.resolve(__dirname, "src"),
   mode: "development",
@@ -24,7 +27,7 @@ module.exports = {
   },
   plugins: [
     new CleanWebpackPlugin({
-      filename: "bundle.[hash].css",
+      //   filename: "bundle.[hash].css",
     }),
     new HTMLWebpackPlugin({
       template: "index.html", // создает шаблон для html, чтобы самостоятельно его не генерировать (создавать)
@@ -37,7 +40,9 @@ module.exports = {
         },
       ], // чтобы переносить fovico
     }),
-    new MiniCssExtractPlugin(),
+    new MiniCssExtractPlugin({
+      filename: "bundle.[hash].css",
+    }),
   ],
   module: {
     rules: [

@@ -6,3 +6,6 @@ npm install less-loader --save-dev - loader для less (преобразует 
 npm i -D css-loader - css loader
 npm install --save-dev babel-loader @babel/core - ставим babel 
 npm install @babel/preset-env --save-dev - последние нововведения в js, на сайте babel в том же разделе
+npm i -D cross-env - определяет текущую операционную систему и задает системную переменную,отталкиваясь от операционки ( после мы дописываем ряд в json перед командами)
+
+npm install webpack-dev-server --save-dev
