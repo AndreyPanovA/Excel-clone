@@ -12,3 +12,4 @@ npm install webpack-dev-server --save-dev -- для мгновенного об�
 npm install css-minimizer-webpack-plugin --save-dev -- минификация css
 npm install terser-webpack-plugin --save-dev - минификация js
 npm install --save @babel/polyfill -- для того чтобы убрать ошибку с полифилами и теперь все обновляется автоматически (Can't find variable: regeneratorRuntime) решение: https://stackoverflow.com/questions/50367961/cant-find-variable-regeneratorruntime-reactnative
+npm install normalize.css -- сделать все одинаковым во всех браузерах
