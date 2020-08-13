@@ -1,36 +1,49 @@
 const path = require("path"); // просто для определения путей, можно и без него прописать нативно
+const CssMinimizerPlugin = require("css-minimizer-webpack-plugin"); // минификация css
+const TerserPlugin = require("terser-webpack-plugin"); // минификация js
 // __dirname -  путь до текущей папки
 const { CleanWebpackPlugin } = require("clean-webpack-plugin"); // чистит папку dist, удаляет лишние файлы с hash
-const HTMLWebpackPlugin = require("html-webpack-plugin");
-const CopyPlugin = require("copy-webpack-plugin"); // favicon
+const HTMLWebpackPlugin = require("html-webpack-plugin"); // создает шаблон для html, чтобы самостоятельно его не генерировать (создавать) в папке dist
+const CopyPlugin = require("copy-webpack-plugin"); // favicon переносит в папку дист
 const MiniCssExtractPlugin = require("mini-css-extract-plugin"); // css modules
 const isProd = process.env.NODE_ENV === "production"; // системная переменная для определения текущего режима сборки
 const isDev = !isProd;
-console.log("prod", isProd);
-console.log("dev", isDev);
+
+const filename = (ext) => (isDev ? `bundle.${ext}` : `bundle.[hash].${ext}`); // если в режиме build, то видим хеши
 module.exports = {
-  context: path.resolve(__dirname, "src"),
-  mode: "development",
-  entry: "./index.js",
+  context: path.resolve(__dirname, "src"), // следит за всем в этой папке
+  mode: "development", // режим разработки
+  entry: ["@babel/polyfill", "./index.js"], // фаил, с которого все начинается
   output: {
     //   Куда все складываем
-    filename: "bundle.[hash].js", // добавляя hash мы получаем новую версию с hash названием, пока dist не чистится
+
+    filename: filename("js"), //"bundle.[hash].js" добавляя hash мы получаем новую версию с hash названием, пока dist не чистится
     path: path.resolve(__dirname, "dist"),
   },
   resolve: {
-    extensions: ["js"],
+    extensions: [".js"],
     alias: {
       // мгновенный путь через собаку к папке src и @core к src/core
       "@": path.resolve(__dirname, "src"),
       "@core": path.resolve(__dirname, "src/core"),
     },
   },
+  devtool: isDev ? "source-map" : false, // добавляет исходники в режиме разработки .map
+  devServer: {
+    // мгновенное обновление в режиме разработки
+    port: 3000,
+    hot: isDev,
+  },
   plugins: [
     new CleanWebpackPlugin({
       //   filename: "bundle.[hash].css",
     }),
     new HTMLWebpackPlugin({
-      template: "index.html", // создает шаблон для html, чтобы самостоятельно его не генерировать (создавать)
+      template: "index.html", // создает шаблон для html, чтобы самостоятельно его не генерировать (создавать) в папке dist
+      minify: {
+        removeComments: isProd,
+        collapseWhitespace: isProd,
+      },
     }),
     new CopyPlugin({
       patterns: [
@@ -41,7 +54,7 @@ module.exports = {
       ], // чтобы переносить fovico
     }),
     new MiniCssExtractPlugin({
-      filename: "bundle.[hash].css",
+      filename: filename("css"), //"bundle.[hash].css", выносить css из js в отдельный фаил
     }),
   ],
   module: {
@@ -61,5 +74,9 @@ module.exports = {
         },
       }, // подкрепляем babel
     ],
+  },
+  optimization: {
+    minimize: isProd,
+    minimizer: [new CssMinimizerPlugin(), new TerserPlugin()],
   },
 };
