@@ -1,14 +1,27 @@
+import { $ } from "../../core/dom"
+
 export class Excel {
+    // Просто выводит HTML =  render, он собирает данные из всех компонентов и выводит 
     constructor(selector, options) {
         this.$el = document.querySelector(selector)
         this.components = options.components || []
     }
     getRoot() {
-        const $root = document.createElement("div")
+        // Начало
+        const $root = $.create("div", "excel")
+        // const $root = document.createElement("div")
+        // $root.classList.add("excel")
+        // Конец
         this.components.forEach(Component => {
-            const component = new Component()
-            // console.log(component)
-            $root.insertAdjacentHTML("beforeend", component.toHTML())
+            // Начало
+            const $el = $.create("div", Component.className)
+            //  const $el = document.createElement("div") // внутрь него будем складывать наш шаблон
+            // $el.classList.add(Component.className) // присваиваем базовый класс нашему контейнеру
+            // Конец
+            const component = new Component($el) // наследник от Excel компонента
+            $el.innerHTML = component.toHTML()
+            $root.append($el)
+            //  
 
         });
 
