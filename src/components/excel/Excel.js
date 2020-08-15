@@ -3,7 +3,8 @@ import { $ } from "../../core/dom"
 export class Excel {
     // Просто выводит HTML =  render, он собирает данные из всех компонентов и выводит 
     constructor(selector, options) {
-        this.$el = document.querySelector(selector)
+        this.$el = $(selector)
+        // this.$el = document.querySelector(selector)
         this.components = options.components || []
     }
     getRoot() {
@@ -19,7 +20,10 @@ export class Excel {
             // $el.classList.add(Component.className) // присваиваем базовый класс нашему контейнеру
             // Конец
             const component = new Component($el) // наследник от Excel компонента
-            $el.innerHTML = component.toHTML()
+            // Начало 1
+            $el.html(component.toHTML())
+            // $el.innerHTML = component.toHTML()
+            // Конец 1
             $root.append($el)
             //  
 
