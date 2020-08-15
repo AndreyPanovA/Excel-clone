@@ -13,7 +13,7 @@ export class Excel {
         // const $root = document.createElement("div")
         // $root.classList.add("excel")
         // Конец
-        this.components.forEach(Component => {
+        this.components = this.components.map(Component => {
             // Начало
             const $el = $.create("div", Component.className)
             //  const $el = document.createElement("div") // внутрь него будем складывать наш шаблон
@@ -25,6 +25,7 @@ export class Excel {
             // $el.innerHTML = component.toHTML()
             // Конец 1
             $root.append($el)
+            return component
             //  
 
         });
@@ -38,5 +39,9 @@ export class Excel {
 
         // this.$el.append(node)
         this.$el.append(this.getRoot())
+
+        // После всего
+        this.components.forEach(component => component.init());
+
     }
 }
