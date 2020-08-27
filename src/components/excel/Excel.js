@@ -3,13 +3,14 @@ import { $ } from "../../core/dom"
 export class Excel {
     // Просто выводит HTML =  render, он собирает данные из всех компонентов и выводит 
     constructor(selector, options) {
-        this.$el = $(selector)
+        this.$el = $(selector) // контент с div#app
         // this.$el = document.querySelector(selector)
         this.components = options.components || []
     }
     getRoot() {
         // Начало
         const $root = $.create("div", "excel")
+        // console.log($root, "Excel")
         // const $root = document.createElement("div")
         // $root.classList.add("excel")
         // Конец
@@ -36,12 +37,9 @@ export class Excel {
         // console.log(this.$el)
         // const node = document.createElement("h1")
         // node.textContent = "Test"
-
         // this.$el.append(node)
         this.$el.append(this.getRoot())
-
         // После всего
         this.components.forEach(component => component.init());
-
     }
 }

@@ -1,4 +1,3 @@
-// import "./module";
 import "./less/index.less";
 import { Excel } from "./components/excel/Excel";
 import { Header } from "./components/header/Header";
